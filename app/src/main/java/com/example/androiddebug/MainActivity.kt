@@ -12,9 +12,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         val helloTextView: TextView = findViewById(R.id.hello_world)
         helloTextView.text = "Hello, debugging!"
-        setContentView(R.layout.activity_main)
+
         logging()
         division()
     }
