@@ -1,14 +1,19 @@
 package com.example.androiddebug
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 
 private const val  TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val helloTextView: TextView = findViewById(R.id.hello_world)
+        helloTextView.text = "Hello, debugging!"
         setContentView(R.layout.activity_main)
         logging()
         division()
