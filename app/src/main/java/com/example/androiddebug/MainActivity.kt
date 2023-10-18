@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 
+import kotlin.concurrent.thread
+
 private const val  TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val helloTextView: TextView = findViewById(R.id.hello_world)
-        helloTextView.text = "Hello, debugging!"
+        //val helloTextView: TextView = findViewById(R.id.hello_world)
+        //helloTextView.text = "Hello, debugging!"
 
         logging()
         division()
@@ -23,10 +25,17 @@ class MainActivity : AppCompatActivity() {
     fun division() {
         val numerator = 60
         var denominator = 4
-        repeat(4) {
-            Log.d(TAG, "$denominator")
-            Log.v(TAG, "${numerator / denominator}")
-            denominator--
+
+        thread(start = true){
+            repeat(4) {
+                Thread.sleep(3000)
+                Log.d(TAG, "$denominator")
+                Log.v(TAG, "${numerator / denominator}")
+                runOnUiThread {
+                    findViewById<TextView>(R.id.division_view).setText("${numerator / denominator}")
+                    denominator--
+                }
+            }
         }
     }
 
